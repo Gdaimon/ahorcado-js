@@ -1,4 +1,4 @@
-(async () => {
+(async (palabras) => {
   const letras = [
     'A',
     'B',
@@ -30,7 +30,7 @@
   ];
   const $divAbecedario = document.querySelector('#letras');
   const $palabraOculta = document.querySelector('h1');
-  let palabra = 'UVA';
+  let palabra = generarPalabraRandom();
   let palabraOculta = '_ '.repeat(palabra.length);
   let intentos = 0;
 
@@ -39,6 +39,13 @@
   function eventListeners() {
     document.addEventListener('DOMContentLoaded', iniciarAplicacion);
     $divAbecedario.addEventListener('click', seleccionLetra);
+  }
+
+  function generarPalabraRandom() {
+    const indice = Math.floor(
+      Math.random() * (palabras.length - 1 - 0 + 1) + 0,
+    );
+    return palabras[indice].toUpperCase();
   }
 
   function existeLetra(letra) {
@@ -116,4 +123,4 @@
     button.textContent = letra;
     $divAbecedario.appendChild(button);
   }
-})();
+})(listaPalabra);
