@@ -30,7 +30,7 @@
   ];
   const $divAbecedario = document.querySelector('#letras');
   const $palabraOculta = document.querySelector('h1');
-  let palabra = 'AGUACATE';
+  let palabra = 'UVA';
   let palabraOculta = '_ '.repeat(palabra.length);
   let intentos = 0;
 
@@ -42,7 +42,7 @@
   }
 
   function existeLetra(letra) {
-    if (palabra.indexOf(letra) <= 0) {
+    if (palabra.indexOf(letra) < 0) {
       dibujarImagen(intentos++);
     }
   }
@@ -58,20 +58,38 @@
 
   function actualizaNumeroIntentos(intento, texto) {
     const small = document.querySelector('small');
-    small.textContent = `${intento} / ${texto.length}`;
+    small.textContent = `${intento} / 9`;
   }
 
   function validarCoicidenciaLetra(letra) {
-    existeLetra(letra);
-    actualizaNumeroIntentos(intentos, palabra);
-    const arregloTemporal = $palabraOculta.textContent.trim().split(' ');
+    if (intentos < 9) {
+      existeLetra(letra);
+      actualizaNumeroIntentos(intentos, palabra);
+      const arregloTemporal = $palabraOculta.textContent.trim().split(' ');
 
-    for (let indice = 0; indice <= palabra.length; ++indice) {
-      if (palabra[indice] === letra) {
-        arregloTemporal[indice] = letra;
+      for (let indice = 0; indice <= palabra.length; ++indice) {
+        if (palabra[indice] === letra) {
+          arregloTemporal[indice] = letra;
+        }
       }
+      $palabraOculta.textContent = arregloTemporal.join(' ');
+      verificaGane();
     }
-    $palabraOculta.textContent = arregloTemporal.join(' ');
+  }
+
+  function verificaGane() {
+    if (intentos > 8) {
+      const div = document.querySelector('#perdio');
+      div.classList.remove('d-none');
+    }
+    const palabraEvaluar = $palabraOculta.textContent
+      .trim()
+      .split(' ')
+      .join('');
+    if (palabraEvaluar === palabra) {
+      const div = document.querySelector('#gano');
+      div.classList.remove('d-none');
+    }
   }
 
   function seleccionLetra(e) {
