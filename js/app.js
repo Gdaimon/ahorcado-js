@@ -1,33 +1,4 @@
-(async (palabras) => {
-  const letras = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'Ñ',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-  ];
+(async (palabras, letras) => {
   const $divAbecedario = document.querySelector('#letras');
   const $palabraOculta = document.querySelector('h1');
   let palabra = generarPalabraRandom();
@@ -123,4 +94,4 @@
     button.textContent = letra;
     $divAbecedario.appendChild(button);
   }
-})(listaPalabra);
+})(listaPalabra, letras);
